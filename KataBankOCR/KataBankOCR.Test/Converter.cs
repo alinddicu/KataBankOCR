@@ -16,12 +16,12 @@
         {
             var lines = text.Split(Environment.NewLine.ToCharArray());
             var digits = lines
-                .Where(l => !l.Equals(string.Empty))
-                .Select(l => l.ToCharArray().Select(c => c.ToString(CultureInfo.InvariantCulture)))
-                .Select(l => l.Select((s, index) => new CharacterGroupBy3(index, s)))
-                .Select(l => l.GroupBy(e => e.Index / 3)).ToArray()
+                .Where(line => !line.Equals(string.Empty))
+                .Select(line => line.ToCharArray().Select(c => c.ToString(CultureInfo.InvariantCulture)))
+                .Select(line => line.Select((s, index) => new Small3CharacterGroupingInfo(s, index)))
+                .Select(line => line.GroupBy(s => s.Index / 3))
                 .SelectMany(e => e.Select(i => i.ToList()))
-                .Select((o, index) => new IntermediateSymbolGroup(index, o))
+                .Select((o, index) => new Intermediate9CharacterGroupingInfo(o, index))
                 .GroupBy(o => o.Index % 9)
                 .ToDictionary(o => o.Key)
                 .Values
@@ -36,10 +36,10 @@
         {
             private readonly string _symbol;
 
-            public LinearDigitSymbol(IEnumerable<IntermediateSymbolGroup> isgs) 
+            public LinearDigitSymbol(IEnumerable<Intermediate9CharacterGroupingInfo> isgs) 
                 : this()
             {
-                _symbol = string.Join(string.Empty, isgs.SelectMany(o => o.CharacterGroups.Select(o1 => o1.Character)).ToArray());
+                _symbol = string.Join(string.Empty, isgs.SelectMany(o => o.GroupingInformation.Select(o1 => o1.Character)).ToArray());
             }
 
             public string ToDigit()
@@ -48,23 +48,27 @@
             }
         }
 
-        private struct IntermediateSymbolGroup
+        private struct Intermediate9CharacterGroupingInfo
         {
-            public IntermediateSymbolGroup(int index, IEnumerable<CharacterGroupBy3> characterGroups)
+            public Intermediate9CharacterGroupingInfo(
+                IEnumerable<Small3CharacterGroupingInfo> groupingInformation,
+                int index)
                 : this()
             {
                 Index = index;
-                CharacterGroups = characterGroups;
+                GroupingInformation = groupingInformation;
             }
 
             public int Index { get; private set; }
 
-            public IEnumerable<CharacterGroupBy3> CharacterGroups { get; private set; }
+            public IEnumerable<Small3CharacterGroupingInfo> GroupingInformation { get; private set; }
         }
 
-        private struct CharacterGroupBy3
+        private struct Small3CharacterGroupingInfo
         {
-            public CharacterGroupBy3(int index, string character)
+            public Small3CharacterGroupingInfo(
+                string character,
+                int index)
                 : this()
             {
                 Index = index;
