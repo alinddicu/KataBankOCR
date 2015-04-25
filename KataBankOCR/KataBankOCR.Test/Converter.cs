@@ -7,7 +7,8 @@
 
     public class Converter
     {
-        private static readonly Dictionary<string, string> LinearSymbolToDigit = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> LinearSymbolToDigitMapping 
+            = new Dictionary<string, string>
         {
             {" _ | ||_|", "0"}
         };
@@ -17,16 +18,20 @@
             var lines = text.Split(Environment.NewLine.ToCharArray());
             var digits = lines
                 .Where(line => !line.Equals(string.Empty))
+                // transforming to list of strings = easier to work with
                 .Select(line => line.ToCharArray().Select(c => c.ToString(CultureInfo.InvariantCulture)))
-                .Select(line => line.Select((s, index) => new Small3CharacterGroupingInfo(s, index)))
+                .Select(line => line.Select((character, index) => new Small3CharacterGroupingInfo(character, index)))
+                // each symbol is formed of 3 columns => group of 3 chars
                 .Select(line => line.GroupBy(s => s.Index / 3))
                 .SelectMany(e => e.Select(i => i.ToList()))
-                .Select((o, index) => new Intermediate9CharacterGroupingInfo(o, index))
+                .Select((groupInfo, index) => new Intermediate9CharacterGroupingInfo(groupInfo, index))
+                // each symbol is formed of 3 lines * 3 colums = 9 characters => group it
                 .GroupBy(o => o.Index % 9)
                 .ToDictionary(o => o.Key)
+                // easy part
                 .Values
-                .Select(v => new LinearDigitSymbol(v))
-                .Select(ls => ls.ToDigit())
+                .Select(value => new LinearDigitSymbol(value))
+                .Select(linearSymbol => linearSymbol.ToDigit())
                 .ToArray();
 
             return string.Join(string.Empty, digits);
@@ -39,29 +44,29 @@
             public LinearDigitSymbol(IEnumerable<Intermediate9CharacterGroupingInfo> isgs) 
                 : this()
             {
-                _symbol = string.Join(string.Empty, isgs.SelectMany(o => o.GroupingInformation.Select(o1 => o1.Character)).ToArray());
+                _symbol = string.Join(string.Empty, isgs.SelectMany(o => o.GroupInformation.Select(o1 => o1.Character)).ToArray());
             }
 
             public string ToDigit()
             {
-                return LinearSymbolToDigit[_symbol];
+                return LinearSymbolToDigitMapping[_symbol];
             }
         }
 
         private struct Intermediate9CharacterGroupingInfo
         {
             public Intermediate9CharacterGroupingInfo(
-                IEnumerable<Small3CharacterGroupingInfo> groupingInformation,
+                IEnumerable<Small3CharacterGroupingInfo> groupInformation,
                 int index)
                 : this()
             {
                 Index = index;
-                GroupingInformation = groupingInformation;
+                GroupInformation = groupInformation;
             }
 
             public int Index { get; private set; }
 
-            public IEnumerable<Small3CharacterGroupingInfo> GroupingInformation { get; private set; }
+            public IEnumerable<Small3CharacterGroupingInfo> GroupInformation { get; private set; }
         }
 
         private struct Small3CharacterGroupingInfo
