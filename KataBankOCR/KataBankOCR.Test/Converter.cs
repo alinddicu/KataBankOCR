@@ -10,13 +10,25 @@
         private static readonly Dictionary<string, string> LinearSymbolToDigitMapping 
             = new Dictionary<string, string>
         {
-            {" _ | ||_|", "0"}
+            {" _ | ||_|", "0"},
+           //"     |  | "
+           //"     |  | "
+            {"     |  |", "1"},
+           //" _  _||_ "
+            {" _  _||_ ", "2"},
+            {" _  _| _|", "3"},
+            {"   |_|  |", "4"},
+            {" _ |_  _|", "5"},
+            {" _ |_ |_|", "6"},
+            {" _   |  |", "7"},
+            {" _ |_||_|", "8"},
+            {" _ |_| _|", "9"},
         };
 
         public string Convert(string text)
         {
             var lines = text.Split(Environment.NewLine.ToCharArray());
-            var digits = lines
+            var symbols = lines
                 .Where(line => !line.Equals(string.Empty))
                 // transforming to list of strings = easier to work with
                 .Select(line => line.ToCharArray().Select(c => c.ToString(CultureInfo.InvariantCulture)))
@@ -31,6 +43,8 @@
                 // easy part
                 .Values
                 .Select(value => new LinearDigitSymbol(value))
+                .ToArray();
+            var digits = symbols
                 .Select(linearSymbol => linearSymbol.ToDigit())
                 .ToArray();
 
@@ -49,7 +63,17 @@
 
             public string ToDigit()
             {
+                if (!LinearSymbolToDigitMapping.ContainsKey(_symbol))
+                {
+                    return "x";
+                }
+
                 return LinearSymbolToDigitMapping[_symbol];
+            }
+
+            public override string ToString()
+            {
+                return _symbol;
             }
         }
 
