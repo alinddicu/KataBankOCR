@@ -11,7 +11,6 @@
         private static readonly Converter TextConverter = new Converter();
 
         [TestMethod]
-        [Ignore]
         [DeploymentItem("UserStory1TestCases", "Ressources")]
         public void GivenUseCase1TestCasesWhenConvertThenReturnStringMathcingFileName()
         {
@@ -25,6 +24,7 @@
         }
 
         [TestMethod]
+        [Ignore]
         [DeploymentItem("UserStory1TestCases/123456789.txt", "Ressources")]
         public void GivenUseCase1TxtWhenConvertThenReturn000000000()
         {
