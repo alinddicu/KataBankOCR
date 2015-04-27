@@ -10,71 +10,6 @@
         public const string IllegalCharacterReplacement = "?";
         private const int SymbolsPerTextFileLine = 9;
 
-        private const string Zero =
-            " _ " +
-            "| |" +
-            "|_|";
-
-        private const string One =
-            "   " +
-            "  |" +
-            "  |";
-
-        private const string Two =
-            " _ " +
-            " _|" +
-            "|_ ";
-
-        private const string Three =
-            " _ " +
-            " _|" +
-            " _|";
-
-        private const string Four =
-            "   " +
-            "|_|" +
-            "  |";
-
-        private const string Five =
-            " _ " +
-            "|_ " +
-            " _|";
-
-        private const string Six =
-            " _ " +
-            "|_ " +
-            "|_|";
-
-        private const string Seven =
-            " _ " +
-            "  |" +
-            "  |";
-
-        private const string Eight =
-            " _ " +
-            "|_|" +
-            "|_|";
-
-        private const string Nine =
-            " _ " +
-            "|_|" +
-            " _|";
-
-        private static readonly Dictionary<string, string> LinearSymbolToDigitMapping
-            = new Dictionary<string, string>
-        {
-            {Zero, "0"},
-            {One, "1"},
-            {Two, "2"},
-            {Three, "3"},
-            {Four, "4"},
-            {Five, "5"},
-            {Six, "6"},
-            {Seven, "7"},
-            {Eight, "8"},
-            {Nine, "9"},
-        };
-
         private readonly AccountNumberApproximator _approximator = new AccountNumberApproximator();
 
         public AccountNumber Convert(string text)
@@ -117,12 +52,12 @@
 
             public string ToDigit()
             {
-                if (!LinearSymbolToDigitMapping.ContainsKey(_symbol))
+                if (!Symbol.SymbolToDigitMapping.ContainsKey(_symbol))
                 {
                     return IllegalCharacterReplacement;
                 }
 
-                return LinearSymbolToDigitMapping[_symbol];
+                return Symbol.SymbolToDigitMapping[_symbol];
             }
 
             public override string ToString()
