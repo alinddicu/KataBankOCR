@@ -11,10 +11,10 @@
         private static readonly Converter TextConverter = new Converter();
 
         [TestMethod]
-        [DeploymentItem("UserStory1TestCases", "Ressources")]
+        [DeploymentItem("UserStory1TestCases", "Ressources1")]
         public void GivenUseCase1TestCasesWhenConvertThenReturnStringMathcingFileName()
         {
-            const string directoryPath = "Ressources";
+            const string directoryPath = "Ressources1";
             foreach (var filePath in Directory.GetFiles(directoryPath))
             {
                 var file = new FileInfo(filePath);
@@ -25,10 +25,10 @@
 
         [TestMethod]
         [Ignore]
-        [DeploymentItem("UserStory1TestCases/123456789.txt", "Ressources")]
+        [DeploymentItem("UserStory1TestCases/123456789.txt", "Ressources1")]
         public void GivenUseCase1TxtWhenConvertThenReturn000000000()
         {
-            const string path = "Ressources/123456789.txt";
+            const string path = "Ressources1/123456789.txt";
             var text = File.ReadAllText(path);
             var textConverter = new Converter();
             var checkedText = textConverter.Convert(text);

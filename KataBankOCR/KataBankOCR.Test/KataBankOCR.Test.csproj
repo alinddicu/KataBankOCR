@@ -58,6 +58,7 @@
     <Compile Include="UserStory1Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserStory2Test.cs" />
+    <Compile Include="UserStory3Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserStory1TestCases\123456789.txt">
@@ -91,6 +92,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="UserStory1TestCases\000000000.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UserStory3TestCases\000000051.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UserStory3TestCases\1234x678x.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UserStory3TestCases\49006771x.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

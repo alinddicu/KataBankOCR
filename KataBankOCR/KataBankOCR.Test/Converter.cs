@@ -56,6 +56,8 @@
 
         private struct LinearDigitSymbol
         {
+            private const string IllegalCharacterReplacement = "?";
+
             private readonly string _symbol;
 
             public LinearDigitSymbol(IEnumerable<Intermediate9CharacterGroupingInfo> isgs)
@@ -68,7 +70,7 @@
             {
                 if (!LinearSymbolToDigitMapping.ContainsKey(_symbol))
                 {
-                    return "x";
+                    return IllegalCharacterReplacement;
                 }
 
                 return LinearSymbolToDigitMapping[_symbol];
