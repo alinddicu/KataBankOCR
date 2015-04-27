@@ -7,7 +7,7 @@
 
     public class Converter
     {
-        private const string SymbolsPerTextFileLine = 9;
+        private const int SymbolsPerTextFileLine = 9;
 
         private static readonly Dictionary<string, string> LinearSymbolToDigitMapping
             = new Dictionary<string, string>
@@ -46,6 +46,7 @@
                 .Values
                 .Select(value => new LinearDigitSymbol(value))
                 .ToArray();
+
             var digits = symbols
                 .Select(linearSymbol => linearSymbol.ToDigit())
                 .ToArray();

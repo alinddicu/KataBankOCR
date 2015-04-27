@@ -53,9 +53,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AccountNumberChecksumValidator.cs" />
     <Compile Include="Converter.cs" />
     <Compile Include="UserStory1Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserStory2Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserStory1TestCases\123456789.txt">
