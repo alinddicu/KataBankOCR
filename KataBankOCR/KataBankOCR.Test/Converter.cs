@@ -13,10 +13,7 @@
             = new Dictionary<string, string>
         {
             {" _ | ||_|", "0"},
-           //"     |  | "
-           //"     |  | "
             {"     |  |", "1"},
-           //" _  _||_ "
             {" _  _||_ ", "2"},
             {" _  _| _|", "3"},
             {"   |_|  |", "4"},
@@ -38,7 +35,7 @@
                 // each symbol is formed of 3 columns => group of 3 chars
                 .Select(line => line.GroupBy(s => s.Index / 3))
                 .SelectMany(e => e.Select(i => i.ToList()))
-                .Select((groupInfo, index) => new Intermediate9CharacterGroupingInfo(groupInfo, index))
+                .Select((groupInfo, index) => new IntermediateCharacterGroupingInfo(groupInfo, index))
                 // grouping vertically
                 .GroupBy(o => o.Index % SymbolsPerTextFileLine)
                 .ToDictionary(o => o.Key)
@@ -60,7 +57,7 @@
 
             private readonly string _symbol;
 
-            public LinearDigitSymbol(IEnumerable<Intermediate9CharacterGroupingInfo> isgs)
+            public LinearDigitSymbol(IEnumerable<IntermediateCharacterGroupingInfo> isgs)
                 : this()
             {
                 _symbol = string.Join(string.Empty, isgs.SelectMany(o => o.GroupInformation.Select(o1 => o1.Character)).ToArray());
@@ -82,9 +79,9 @@
             }
         }
 
-        private struct Intermediate9CharacterGroupingInfo
+        private struct IntermediateCharacterGroupingInfo
         {
-            public Intermediate9CharacterGroupingInfo(
+            public IntermediateCharacterGroupingInfo(
                 IEnumerable<Small3CharacterGroupingInfo> groupInformation,
                 int index)
                 : this()
