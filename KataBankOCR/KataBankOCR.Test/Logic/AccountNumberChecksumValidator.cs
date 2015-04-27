@@ -1,4 +1,4 @@
-﻿namespace KataBankOCR.Test
+﻿namespace KataBankOCR.Test.Logic
 {
     using System;
     using System.Linq;

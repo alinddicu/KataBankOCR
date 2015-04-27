@@ -1,5 +1,6 @@
-﻿namespace KataBankOCR.Test
+﻿namespace KataBankOCR.Test.Tests
 {
+    using Logic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using NFluent;
 

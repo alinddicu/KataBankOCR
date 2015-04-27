@@ -1,17 +1,18 @@
-﻿namespace KataBankOCR.Test
+﻿namespace KataBankOCR.Test.Tests
 {
     using System;
     using System.IO;
+    using Logic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using NFluent;
 
     [TestClass]
     public class UserStory1Test
     {
-        private static readonly Converter TextConverter = new Converter();
+        private static readonly TextToAccountNumberConverter Converter = new TextToAccountNumberConverter();
 
         [TestMethod]
-        [DeploymentItem("UserStory1TestCases", "Ressources1")]
+        [DeploymentItem("Tests/UserStory1TestCases", "Ressources1")]
         public void GivenUseCase1TestCasesWhenConvertThenReturnStringMathcingFileName()
         {
             const string directoryPath = "Ressources1";
@@ -19,18 +20,19 @@
             {
                 var file = new FileInfo(filePath);
                 var text = File.ReadAllText(file.FullName);
-                Check.That(TextConverter.Convert(text)).IsEqualTo(Path.GetFileNameWithoutExtension(file.Name));
+                var conversionResult = Converter.Convert(text);
+                Check.That(conversionResult.Value).IsEqualTo(Path.GetFileNameWithoutExtension(file.Name));
             }
         }
 
         [TestMethod]
         [Ignore]
-        [DeploymentItem("UserStory1TestCases/123456789.txt", "Ressources1")]
+        [DeploymentItem("Tests/UserStory1TestCases/123456789.txt", "Ressources1")]
         public void GivenUseCase1TxtWhenConvertThenReturn000000000()
         {
             const string path = "Ressources1/123456789.txt";
             var text = File.ReadAllText(path);
-            var textConverter = new Converter();
+            var textConverter = new TextToAccountNumberConverter();
             var checkedText = textConverter.Convert(text);
             Check.That(checkedText).IsEqualTo("123456789");
         }

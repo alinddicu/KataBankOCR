@@ -1,11 +1,11 @@
-﻿namespace KataBankOCR.Test
+﻿namespace KataBankOCR.Test.Logic
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
 
-    public class Converter
+    public class TextToAccountNumberConverter
     {
         private const int SymbolsPerTextFileLine = 9;
 
@@ -24,7 +24,7 @@
             {" _ |_| _|", "9"},
         };
 
-        public string Convert(string text)
+        public AccountNumber Convert(string text)
         {
             var lines = text.Split(Environment.NewLine.ToCharArray());
             var symbols = lines
@@ -48,7 +48,7 @@
                 .Select(linearSymbol => linearSymbol.ToDigit())
                 .ToArray();
 
-            return string.Join(string.Empty, digits);
+            return new AccountNumber(string.Join(string.Empty, digits));
         }
 
         private struct LinearDigitSymbol
