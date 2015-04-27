@@ -7,7 +7,9 @@
 
     public class Converter
     {
-        private static readonly Dictionary<string, string> LinearSymbolToDigitMapping 
+        private const string SymbolsPerTextFileLine = 9;
+
+        private static readonly Dictionary<string, string> LinearSymbolToDigitMapping
             = new Dictionary<string, string>
         {
             {" _ | ||_|", "0"},
@@ -37,8 +39,8 @@
                 .Select(line => line.GroupBy(s => s.Index / 3))
                 .SelectMany(e => e.Select(i => i.ToList()))
                 .Select((groupInfo, index) => new Intermediate9CharacterGroupingInfo(groupInfo, index))
-                // each symbol is formed of 3 lines * 3 colums = 9 characters => group it
-                .GroupBy(o => o.Index % 9)
+                // grouping vertically
+                .GroupBy(o => o.Index % SymbolsPerTextFileLine)
                 .ToDictionary(o => o.Key)
                 // easy part
                 .Values
@@ -55,7 +57,7 @@
         {
             private readonly string _symbol;
 
-            public LinearDigitSymbol(IEnumerable<Intermediate9CharacterGroupingInfo> isgs) 
+            public LinearDigitSymbol(IEnumerable<Intermediate9CharacterGroupingInfo> isgs)
                 : this()
             {
                 _symbol = string.Join(string.Empty, isgs.SelectMany(o => o.GroupInformation.Select(o1 => o1.Character)).ToArray());
