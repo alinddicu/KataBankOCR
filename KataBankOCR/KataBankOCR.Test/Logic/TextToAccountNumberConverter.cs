@@ -7,22 +7,75 @@
 
     public class TextToAccountNumberConverter
     {
+        public const string IllegalCharacterReplacement = "?";
         private const int SymbolsPerTextFileLine = 9;
+
+        private const string Zero =
+            " _ " +
+            "| |" +
+            "|_|";
+
+        private const string One =
+            "   " +
+            "  |" +
+            "  |";
+
+        private const string Two =
+            " _ " +
+            " _|" +
+            "|_ ";
+
+        private const string Three =
+            " _ " +
+            " _|" +
+            " _|";
+
+        private const string Four =
+            "   " +
+            "|_|" +
+            "  |";
+
+        private const string Five =
+            " _ " +
+            "|_ " +
+            " _|";
+
+        private const string Six =
+            " _ " +
+            "|_ " +
+            "|_|";
+
+        private const string Seven =
+            " _ " +
+            "  |" +
+            "  |";
+
+        private const string Eight =
+            " _ " +
+            "|_|" +
+            "|_|";
+
+        private const string Nine =
+            " _ " +
+            "|_|" +
+            " _|";
 
         private static readonly Dictionary<string, string> LinearSymbolToDigitMapping
             = new Dictionary<string, string>
         {
-            {" _ | ||_|", "0"},
-            {"     |  |", "1"},
-            {" _  _||_ ", "2"},
-            {" _  _| _|", "3"},
-            {"   |_|  |", "4"},
-            {" _ |_  _|", "5"},
-            {" _ |_ |_|", "6"},
-            {" _   |  |", "7"},
-            {" _ |_||_|", "8"},
-            {" _ |_| _|", "9"},
+            {Zero, "0"},
+            {One, "1"},
+            {Two, "2"},
+            {Three, "3"},
+            {Four, "4"},
+            {Five, "5"},
+            {Six, "6"},
+            {Seven, "7"},
+            {Eight, "8"},
+            {Nine, "9"},
         };
+
+        private readonly AccountNumberApproximator _approximator = new AccountNumberApproximator();
 
         public AccountNumber Convert(string text)
         {
@@ -47,14 +100,13 @@
             var digits = symbols
                 .Select(linearSymbol => linearSymbol.ToDigit())
                 .ToArray();
+            var accountNumber = string.Join(string.Empty, digits);
 
-            return new AccountNumber(string.Join(string.Empty, digits));
+            return _approximator.Approximate(accountNumber);
         }
 
         private struct LinearDigitSymbol
         {
-            private const string IllegalCharacterReplacement = "?";
-
             private readonly string _symbol;
 
             public LinearDigitSymbol(IEnumerable<IntermediateCharacterGroupingInfo> isgs)

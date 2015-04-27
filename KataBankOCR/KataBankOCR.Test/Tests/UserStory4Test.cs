@@ -15,7 +15,7 @@
             const string path = "Ressources4/111111111.txt";
             var text = File.ReadAllText(path);
             var textConverter = new TextToAccountNumberConverter();
-            var checkedText = textConverter.Convert(text);
+            var checkedText = textConverter.Convert(text).Value;
             Check.That(checkedText).IsEqualTo("711111111");
         }
     }

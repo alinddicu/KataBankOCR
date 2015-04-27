@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Logic\AccountNumberApproximator.cs" />
     <Compile Include="Logic\AccountNumber.cs" />
     <Compile Include="Logic\AccountNumberChecksumValidator.cs" />
     <Compile Include="Logic\TextToAccountNumberConverter.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Tests\UserStory2Test.cs" />
     <Compile Include="Tests\UserStory3Test.cs" />
     <Compile Include="Tests\UserStory4Test.cs" />
-    <Compile Include="Logic\ValidationResult.cs" />
+    <Compile Include="Logic\ValidationStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Tests\UserStory1TestCases\123456789.txt">
@@ -106,7 +107,9 @@
     <Content Include="Tests\UserStory3TestCases\49006771x.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tests\UserStory4TestCases\111111111.txt" />
+    <Content Include="Tests\UserStory4TestCases\111111111.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
