@@ -23,7 +23,6 @@
         private SymbolTransformationMapping Generate(Symbol symbol)
         {
             var mapping = new SymbolTransformationMapping(symbol);
-
             foreach (var item in symbol.LinearForm.ToArray().Select((character, index) => new { Character = character, Index = index }))
             {
                 var replacingCharacters = GetReplacingCharacters(item.Character);

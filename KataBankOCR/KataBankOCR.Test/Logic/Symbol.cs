@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Text;
-
-namespace KataBankOCR.Test.Logic
+﻿namespace KataBankOCR.Test.Logic
 {
+    using System.Collections.Generic;
+    using System.Text;
+
     public struct Symbol
     {
+        public const string IllegalCharacterReplacement = "?";
+
         public static readonly Symbol Zero = new Symbol(
                                     " _ " +
                                     "| |" +

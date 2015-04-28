@@ -7,7 +7,6 @@
 
     public class TextToAccountNumberConverter
     {
-        public const string IllegalCharacterReplacement = "?";
         private const int SymbolsPerTextFileLine = 9;
 
         private readonly AccountNumberApproximator _approximator = new AccountNumberApproximator();
@@ -54,7 +53,7 @@
             {
                 if (!Symbol.SymbolToDigitMapping.ContainsKey(_symbol))
                 {
-                    return IllegalCharacterReplacement;
+                    return Symbol.IllegalCharacterReplacement;
                 }
 
                 return Symbol.SymbolToDigitMapping[_symbol];

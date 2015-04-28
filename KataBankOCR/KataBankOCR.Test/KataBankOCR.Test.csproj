@@ -78,7 +78,7 @@
     <Content Include="Tests\UserStory1TestCases\888888888.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tests\UserStory1TestCases\777777777.txt">
+    <Content Include="Tests\UserStory1TestCases\777777177.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Tests\UserStory1TestCases\666666666.txt">
@@ -90,13 +90,13 @@
     <Content Include="Tests\UserStory1TestCases\444444444.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tests\UserStory1TestCases\333333333.txt">
+    <Content Include="Tests\UserStory1TestCases\333393333.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Tests\UserStory1TestCases\222222222.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tests\UserStory1TestCases\111111111.txt">
+    <Content Include="Tests\UserStory1TestCases\711111111.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Tests\UserStory1TestCases\000000000.txt">

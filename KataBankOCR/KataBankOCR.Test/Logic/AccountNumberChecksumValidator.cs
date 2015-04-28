@@ -7,7 +7,12 @@
     {
         public bool Validate(string accountNumber)
         {
-            accountNumber = string.Join("", accountNumber.ToCharArray().Reverse().ToArray());
+            if (accountNumber.Contains(Symbol.IllegalCharacterReplacement))
+            {
+                return false;
+            }
+
+            accountNumber = string.Join(string.Empty, accountNumber.ToCharArray().Reverse().ToArray());
 
             var sum = accountNumber
                 .ToCharArray()
