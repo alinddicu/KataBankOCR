@@ -1,5 +1,6 @@
 ﻿namespace KataBankOCR.Test.Tests
 {
+    using System.Linq;
     using Logic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using NFluent;
@@ -12,23 +13,23 @@
         [TestMethod]
         public void When1ThenMappingContainsOnly7()
         {
-            var result = _generator.Generate(Symbol.One);
+            var results = _generator.Generate();
 
-            Check.That(result.TransformationAlternatives).ContainsExactly(Symbol.Seven);
+            Check.That(results.Single(r => r.ReferenceSymbol == Symbol.One).TransformationAlternatives).ContainsExactly(Symbol.Seven);
         }
 
         [TestMethod]
         public void When7ThenMappingContainsOnly1()
         {
-            var result = _generator.Generate(Symbol.Seven);
+            var results = _generator.Generate().ToList();
 
-            Check.That(result.TransformationAlternatives).ContainsExactly(Symbol.One);
+            Check.That(results.Single(r => r.ReferenceSymbol == Symbol.Seven).TransformationAlternatives).ContainsExactly(Symbol.One);
         }
 
         [TestMethod]
         public void When6ThenMappingContains5And8()
         {
-            var result = _generator.Generate(Symbol.Six);
+            var result = _generator.Generate().Single(r => r.ReferenceSymbol == Symbol.Six);
 
             Check.That(result.TransformationAlternatives).HasSize(2);
             Check.That(result.TransformationAlternatives).Contains(Symbol.Five, Symbol.Eight);

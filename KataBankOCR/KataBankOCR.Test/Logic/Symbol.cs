@@ -100,5 +100,15 @@ namespace KataBankOCR.Test.Logic
         {
             return SymbolToDigitMapping[LinearForm];
         }
+
+        public static bool operator ==(Symbol left, Symbol right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Symbol left, Symbol right)
+        {
+            return !(left == right);
+        }
     }
 }

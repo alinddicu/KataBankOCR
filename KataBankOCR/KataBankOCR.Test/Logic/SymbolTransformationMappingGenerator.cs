@@ -20,7 +20,7 @@
             }
         }
 
-        public SymbolTransformationMapping Generate(Symbol symbol)
+        private SymbolTransformationMapping Generate(Symbol symbol)
         {
             var mapping = new SymbolTransformationMapping(symbol);
 
