@@ -4,7 +4,7 @@
     using System.Linq;
     using NFluent;
 
-    public class SymbolTransformationMappingGenerator
+    public class SymbolTransformationMappingsGenerator
     {
         private static readonly char[] ReplacingCharacters = new[] { ' ', '_', '|' };
 
@@ -13,7 +13,7 @@
             foreach (var symbol in Symbol.AllSymbols)
             {
                 var mapping = Generate(symbol);
-                if (mapping.TransformationAlternatives.Any())
+                if (mapping.Transformations.Any())
                 {
                     yield return mapping;
                 }
@@ -32,7 +32,7 @@
                     var candidate = symbol.WithCharAtIndex(replacingCharacter, item.Index);
                     if (candidate.IsValid())
                     {
-                        mapping.TransformationAlternatives.Add(candidate);
+                        mapping.Transformations.Add(candidate);
                     }
                 }
             }

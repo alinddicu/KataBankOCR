@@ -6,16 +6,16 @@
     using NFluent;
 
     [TestClass]
-    public class SymbolTransformationMappingGeneratorTest
+    public class SymbolTransformationMappingsGeneratorTest
     {
-        private static readonly SymbolTransformationMappingGenerator _generator = new SymbolTransformationMappingGenerator();
+        private static readonly SymbolTransformationMappingsGenerator _generator = new SymbolTransformationMappingsGenerator();
 
         [TestMethod]
         public void When1ThenMappingContainsOnly7()
         {
             var results = _generator.Generate();
 
-            Check.That(results.Single(r => r.ReferenceSymbol == Symbol.One).TransformationAlternatives).ContainsExactly(Symbol.Seven);
+            Check.That(results.Single(r => r.Symbol == Symbol.One).Transformations).ContainsExactly(Symbol.Seven);
         }
 
         [TestMethod]
@@ -23,16 +23,16 @@
         {
             var results = _generator.Generate().ToList();
 
-            Check.That(results.Single(r => r.ReferenceSymbol == Symbol.Seven).TransformationAlternatives).ContainsExactly(Symbol.One);
+            Check.That(results.Single(r => r.Symbol == Symbol.Seven).Transformations).ContainsExactly(Symbol.One);
         }
 
         [TestMethod]
         public void When6ThenMappingContains5And8()
         {
-            var result = _generator.Generate().Single(r => r.ReferenceSymbol == Symbol.Six);
+            var result = _generator.Generate().Single(r => r.Symbol == Symbol.Six);
 
-            Check.That(result.TransformationAlternatives).HasSize(2);
-            Check.That(result.TransformationAlternatives).Contains(Symbol.Five, Symbol.Eight);
+            Check.That(result.Transformations).HasSize(2);
+            Check.That(result.Transformations).Contains(Symbol.Five, Symbol.Eight);
         }
 
         [TestMethod]
