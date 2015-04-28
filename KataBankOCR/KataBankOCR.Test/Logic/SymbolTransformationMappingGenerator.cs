@@ -30,7 +30,7 @@
                 foreach (var replacingCharacter in replacingCharacters)
                 {
                     var candidate = symbol.WithCharAtIndex(replacingCharacter, item.Index);
-                    if (Symbol.IsValid(candidate))
+                    if (candidate.IsValid())
                     {
                         mapping.TransformationAlternatives.Add(candidate);
                     }

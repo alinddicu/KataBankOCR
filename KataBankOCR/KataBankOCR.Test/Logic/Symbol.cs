@@ -79,9 +79,9 @@ namespace KataBankOCR.Test.Logic
 
         public string LinearForm { get; private set; }
 
-        public static bool IsValid(Symbol symbol)
+        public bool IsValid()
         {
-            return AllSymbols.Contains(symbol);
+            return AllSymbols.Contains(this);
         }
 
         public Symbol WithCharAtIndex(char character, int index)
@@ -99,6 +99,26 @@ namespace KataBankOCR.Test.Logic
         public string ToDigit()
         {
             return SymbolToDigitMapping[LinearForm];
+        }
+
+        private bool Equals(Symbol other)
+        {
+            return LinearForm.Equals(other.LinearForm);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            return obj is Symbol && Equals((Symbol)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return LinearForm.GetHashCode();
         }
 
         public static bool operator ==(Symbol left, Symbol right)

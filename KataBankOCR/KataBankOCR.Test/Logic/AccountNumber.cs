@@ -7,12 +7,6 @@
             Value = value;
         }
 
-        public AccountNumber(string value, ValidationStatus validationResult)
-            : this(value)
-        {
-            ValidationResult = validationResult;
-        }
-
         public string Value { get; private set; }
 
         public ValidationStatus ValidationResult { get; set; }
