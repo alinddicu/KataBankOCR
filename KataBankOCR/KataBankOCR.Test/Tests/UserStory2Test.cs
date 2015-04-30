@@ -12,7 +12,6 @@
         {
             var validator = new AccountNumberChecksumValidator();
 
-            //var result = validator.Validate("100000002");
             var result = validator.Validate("345882865");
 
             Check.That(result).IsTrue();

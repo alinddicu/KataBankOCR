@@ -1,7 +1,7 @@
 ﻿namespace KataBankOCR.Test.Logic
 {
-    using System;
     using System.Linq;
+    using Symbols;
 
     public class AccountNumberChecksumValidator
     {

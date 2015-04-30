@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using NFluent;
+    using Symbols;
 
     public class DigitSymbolTransformationMappingsGenerator
     {
@@ -10,20 +10,19 @@
 
         public IEnumerable<DigitSymbolTransformationMapping> Generate()
         {
-            foreach (var symbol in DigitSymbol.AllSymbols)
-            {
-                var mapping = Generate(symbol);
-                if (mapping.Transformations.Any())
-                {
-                    yield return mapping;
-                }
-            }
+            return DigitSymbol.AllSymbols
+                .Select(Generate)
+                .Where(mapping => mapping.Transformations.Any());
         }
 
         private DigitSymbolTransformationMapping Generate(DigitSymbol symbol)
         {
             var mapping = new DigitSymbolTransformationMapping(symbol);
-            foreach (var item in symbol.LinearForm.ToArray().Select((character, index) => new { Character = character, Index = index }))
+            var charactersWithIndexes = symbol.LinearForm
+                .ToArray()
+                .Select((character, index) => new {Character = character, Index = index});
+
+            foreach (var item in charactersWithIndexes)
             {
                 var replacingCharacters = GetReplacingCharacters(item.Character);
                 foreach (var replacingCharacter in replacingCharacters)
@@ -39,7 +38,7 @@
             return mapping;
         }
 
-        private IEnumerable<char> GetReplacingCharacters(char reference)
+        private static IEnumerable<char> GetReplacingCharacters(char reference)
         {
             return ReplacingCharacters.Except(new[] { reference });
         }

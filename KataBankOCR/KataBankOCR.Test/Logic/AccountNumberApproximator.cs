@@ -1,10 +1,8 @@
 ﻿namespace KataBankOCR.Test.Logic
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using KataBankOCR.Test.Logic.Symbols;
+    using Symbols;
 
     public class AccountNumberApproximator
     {
@@ -14,24 +12,24 @@
         public Account Approximate(string accountNumberValue, IEnumerable<DigitSymbol> linearDigitSymbols)
         {
             var accountNumber = new Account(accountNumberValue);
+            if (_checksumValidator.Validate(accountNumberValue))
+            {
+                return accountNumber;
+            }
+
             if (accountNumberValue.Contains(DigitSymbol.IllegalCharacterReplacement))
             {
                 accountNumber.ValidationStatus = AccountValidationStatus.ILL;
                 return ApproximateOnIllegal(accountNumber, linearDigitSymbols);
             }
 
-            if (!_checksumValidator.Validate(accountNumberValue))
-            {
-                accountNumber.ValidationStatus = AccountValidationStatus.ERR;
-                return ApproximateOnError(accountNumber);
-            }
-
-            return accountNumber;
+            accountNumber.ValidationStatus = AccountValidationStatus.ERR;
+            return ApproximateOnError(accountNumber);
         }
 
         private Account ApproximateOnIllegal(Account accountNumber, IEnumerable<DigitSymbol> linearDigitSymbols)
         {
-            var illegalPosition = accountNumber.Number.IndexOf(DigitSymbol.IllegalCharacterReplacement);
+            var illegalPosition = accountNumber.Number.IndexOf(DigitSymbol.IllegalCharacterReplacement, System.StringComparison.Ordinal);
             var incompleteDigitSymbol = new DigitSymbol(linearDigitSymbols.ToArray()[illegalPosition].ToString());
 
             var approximations = new List<Account>();
@@ -44,13 +42,15 @@
                 foreach (var replacingCharacter in replacingCharacters)
                 {
                     var candidateDigit = new DigitSymbol(incompleteDigitSymbol.LinearForm.ReplaceCharAtIndex(index, replacingCharacter));
-                    if (candidateDigit.IsValid())
+                    if (!candidateDigit.IsValid())
                     {
-                        var candidateAccountNumberValue = accountNumber.Number.ReplaceCharAtIndex(illegalPosition, candidateDigit.ToDigit());
-                        if (_checksumValidator.Validate(candidateAccountNumberValue))
-                        {
-                            approximations.Add(new Account(candidateAccountNumberValue));
-                        }
+                        continue;
+                    }
+
+                    var candidateAccountNumberValue = accountNumber.Number.ReplaceCharAtIndex(illegalPosition, candidateDigit.ToDigit());
+                    if (_checksumValidator.Validate(candidateAccountNumberValue))
+                    {
+                        approximations.Add(new Account(candidateAccountNumberValue));
                     }
                 }
             }
@@ -60,7 +60,7 @@
             return accountNumber;
         }
 
-        private IEnumerable<string> GetReplacingCharacters(string currentCharacter)
+        private static IEnumerable<string> GetReplacingCharacters(string currentCharacter)
         {
             return DigitSymbolTransformationMappingsGenerator
                 .ReplacingCharacters
@@ -76,14 +76,12 @@
             {
                 var digit = accountNumberDigits[index];
                 var digitTransformations = GetDigitTransformations(digit);
-                foreach (var digitTransformation in digitTransformations)
-                {
-                    var approximation = accountNumber.Number.ReplaceCharAtIndex(index, digitTransformation);
-                    if (_checksumValidator.Validate(approximation))
-                    {
-                        approximations.Add(new Account(approximation));
-                    }
-                }
+                approximations.AddRange(
+                    from digitTransformation in digitTransformations 
+                    select accountNumber.Number.ReplaceCharAtIndex(index, digitTransformation) 
+                    into approximation 
+                    where _checksumValidator.Validate(approximation) 
+                    select new Account(approximation));
             }
 
             accountNumber.UpdateApproximations(approximations);
@@ -94,12 +92,10 @@
         private IEnumerable<string> GetDigitTransformations(string digit)
         {
             var symbol = _symbolTransformations.SingleOrDefault(st => st.Symbol.ToDigit() == digit);
-            if (symbol == null)
-            {
-                return Enumerable.Empty<string>();
-            }
 
-            return symbol.Transformations.Select(t => t.ToDigit());
+            return symbol == null 
+                ? Enumerable.Empty<string>() 
+                : symbol.Transformations.Select(t => t.ToDigit());
         }
     }
 }

@@ -11,7 +11,7 @@
     {
         [TestMethod]
         [DeploymentItem("Tests/UserStory4TestCases/111111111.txt", "Ressources4")]
-        public void GivenUseCase4v1TxtWhenConvert111111111ThenReturn711111111()
+        public void GivenUseCase4V1TxtWhenConvert111111111ThenReturn711111111()
         {
             var account = LoadAndConvert("111111111");
 
@@ -20,7 +20,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory4TestCases/777777777.txt", "Ressources4")]
-        public void GivenUseCase4v1TxtWhenConvert777777777ThenReturn777777177()
+        public void GivenUseCase4V1TxtWhenConvert777777777ThenReturn777777177()
         {
             var account = LoadAndConvert("777777777");
 
@@ -29,7 +29,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory4TestCases/222222222.txt", "Ressources4")]
-        public void GivenUseCase4v1TxtWhenConvert222222222ThenReturn200800000()
+        public void GivenUseCase4V1TxtWhenConvert222222222ThenReturn200800000()
         {
             var account = LoadAndConvert("222222222");
 
@@ -38,7 +38,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory4TestCases/333333333.txt", "Ressources4")]
-        public void GivenUseCase4v1TxtWhenConvert333333333ThenReturn333393333()
+        public void GivenUseCase4V1TxtWhenConvert333333333ThenReturn333393333()
         {
             var account = LoadAndConvert("333333333");
 
@@ -47,7 +47,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory4TestCases/888888888.txt", "Ressources4")]
-        public void GivenUseCase4v1TxtWhenConvert888888888ThenReturnAMB()
+        public void GivenUseCase4V1TxtWhenConvert888888888ThenReturnAmb()
         {
             var account = LoadAndConvert("888888888");
 
@@ -58,7 +58,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory4TestCases/555555555.txt", "Ressources4")]
-        public void GivenUseCase4v1TxtWhenConvert555555555ThenReturnAMB()
+        public void GivenUseCase4V1TxtWhenConvert555555555ThenReturnAmb()
         {
             var account = LoadAndConvert("555555555");
 
@@ -69,7 +69,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory4TestCases/0x0000051.txt", "Ressources4")]
-        public void GivenUseCase4v1TxtWhenConvert0x0000051ThenReturn000000051()
+        public void GivenUseCase4V1TxtWhenConvert0X0000051ThenReturn000000051()
         {
             var account = LoadAndConvert("0x0000051");
 
@@ -78,7 +78,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory4TestCases/x23456789.txt", "Ressources4")]
-        public void GivenUseCase4v1TxtWhenConvertx23456789ThenReturnILL()
+        public void GivenUseCase4V1TxtWhenConvertx23456789ThenReturnIll()
         {
             var account = LoadAndConvert("x23456789");
 
@@ -87,7 +87,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory4TestCases/49086771x.txt", "Ressources4")]
-        public void GivenUseCase4v1TxtWhenConvertx23456789ThenReturn490867715()
+        public void GivenUseCase4V1TxtWhenConvertx23456789ThenReturn490867715()
         {
             var account = LoadAndConvert("49086771x");
 

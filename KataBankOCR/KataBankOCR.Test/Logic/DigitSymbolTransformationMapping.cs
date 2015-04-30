@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using Symbols;
 
     public class DigitSymbolTransformationMapping
     {
@@ -18,7 +19,7 @@
 
         public override string ToString()
         {
-            var format = "Symbol: {0}, Transformations: [{1}]";
+            const string format = "Symbol: {0}, Transformations: [{1}]";
             var toString = string.Format(CultureInfo.InvariantCulture, format, Symbol.ToDigit(), string.Join(", ", Transformations.Select(t => t.ToDigit()).ToArray()));
 
             return toString;

@@ -12,7 +12,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory3TestCases/000000051.txt", "Ressources3")]
-        public void GivenUseCase3v1TxtWhenConvertThenReturn000000051()
+        public void GivenUseCase3V1TxtWhenConvertThenReturn000000051()
         {
             var checkedText = LoadAndConvert("000000051");
             Check.That(checkedText).IsEqualTo("000000051");
@@ -20,7 +20,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory3TestCases/49006771x.txt", "Ressources3")]
-        public void GivenUseCase3v1TxtWhenConvertThenReturn49006771x()
+        public void GivenUseCase3V1TxtWhenConvertThenReturn49006771X()
         {
             var checkedText = LoadAndConvert("49006771x");
             Check.That(checkedText).IsEqualTo("49006771?");
@@ -28,7 +28,7 @@
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory3TestCases/1234x678x.txt", "Ressources3")]
-        public void GivenUseCase3v1TxtWhenConvertThenReturn1234x678x()
+        public void GivenUseCase3V1TxtWhenConvertThenReturn1234X678X()
         {
             var checkedText = LoadAndConvert("1234x678x");
             Check.That(checkedText).IsEqualTo("1234?678?");

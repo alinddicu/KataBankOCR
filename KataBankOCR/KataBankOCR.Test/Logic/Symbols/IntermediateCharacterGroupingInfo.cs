@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KataBankOCR.Test.Logic.Symbols
+﻿namespace KataBankOCR.Test.Logic.Symbols
 {
+    using System.Collections.Generic;
+
     public struct IntermediateCharacterGroupingInfo
     {
         public IntermediateCharacterGroupingInfo(

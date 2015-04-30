@@ -1,8 +1,6 @@
 ﻿namespace KataBankOCR.Test.Logic
 {
     using System;
-    using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using Symbols;
 
@@ -29,7 +27,8 @@
                 .ToDictionary(o => o.Key)
                 // easy part
                 .Values
-                .Select(value => new DigitSymbol(value));
+                .Select(value => new DigitSymbol(value))
+                .ToArray();
 
             var digits = linearSymbols
                 .Select(linearSymbol => linearSymbol.ToDigit())

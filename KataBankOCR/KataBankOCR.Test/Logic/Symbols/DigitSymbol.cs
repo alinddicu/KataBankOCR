@@ -1,15 +1,14 @@
-﻿namespace KataBankOCR.Test.Logic
+﻿namespace KataBankOCR.Test.Logic.Symbols
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using KataBankOCR.Test.Logic.Symbols;
 
     public struct DigitSymbol
     {
         public const string IllegalCharacterReplacement = "?";
 
-        public static readonly DigitSymbol Zero = new DigitSymbol(
+        private static readonly DigitSymbol Zero = new DigitSymbol(
                                     " _ " +
                                     "| |" +
                                     "|_|");
@@ -19,17 +18,17 @@
                                     "  |" +
                                     "  |");
 
-        public static readonly DigitSymbol Two = new DigitSymbol(
+        private static readonly DigitSymbol Two = new DigitSymbol(
                                     " _ " +
                                     " _|" +
                                     "|_ ");
 
-        public static readonly DigitSymbol Three = new DigitSymbol(
+        private static readonly DigitSymbol Three = new DigitSymbol(
                                     " _ " +
                                     " _|" +
                                     " _|");
 
-        public static readonly DigitSymbol Four = new DigitSymbol(
+        private static readonly DigitSymbol Four = new DigitSymbol(
                                     "   " +
                                     "|_|" +
                                     "  |");
@@ -54,12 +53,12 @@
                                     "|_|" +
                                     "|_|");
 
-        public static readonly DigitSymbol Nine = new DigitSymbol(
+        private static readonly DigitSymbol Nine = new DigitSymbol(
                                     " _ " +
                                     "|_|" +
                                     " _|");
 
-        public static readonly Dictionary<string, string> DigitSymbolToDigitMapping = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> DigitSymbolToDigitMapping = new Dictionary<string, string>
         {
             {Zero.ToString(), "0"},
             {One.ToString(), "1"},
