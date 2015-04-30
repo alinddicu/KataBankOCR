@@ -85,9 +85,8 @@
             var textConverter = new TextToAccountNumberConverter();
 
             var accountNumber = textConverter.Convert(text);
-            var checkedText = textConverter.Convert(text).Value;
 
-            Check.That(checkedText).IsEqualTo("000000051");
+            Check.That(accountNumber.Value).IsEqualTo("000000051");
         }
     }
 }

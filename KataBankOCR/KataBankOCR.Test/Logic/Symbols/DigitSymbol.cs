@@ -3,61 +3,61 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public struct Symbol
+    public struct DigitSymbol
     {
         public const string IllegalCharacterReplacement = "?";
 
-        public static readonly Symbol Zero = new Symbol(
+        public static readonly DigitSymbol Zero = new DigitSymbol(
                                     " _ " +
                                     "| |" +
                                     "|_|");
 
-        public static readonly Symbol One = new Symbol(
+        public static readonly DigitSymbol One = new DigitSymbol(
                                     "   " +
                                     "  |" +
                                     "  |");
 
-        public static readonly Symbol Two = new Symbol(
+        public static readonly DigitSymbol Two = new DigitSymbol(
                                     " _ " +
                                     " _|" +
                                     "|_ ");
 
-        public static readonly Symbol Three = new Symbol(
+        public static readonly DigitSymbol Three = new DigitSymbol(
                                     " _ " +
                                     " _|" +
                                     " _|");
 
-        public static readonly Symbol Four = new Symbol(
+        public static readonly DigitSymbol Four = new DigitSymbol(
                                     "   " +
                                     "|_|" +
                                     "  |");
 
-        public static readonly Symbol Five = new Symbol(
+        public static readonly DigitSymbol Five = new DigitSymbol(
                                     " _ " +
                                     "|_ " +
                                     " _|");
 
-        public static readonly Symbol Six = new Symbol(
+        public static readonly DigitSymbol Six = new DigitSymbol(
                                     " _ " +
                                     "|_ " +
                                     "|_|");
 
-        public static readonly Symbol Seven = new Symbol(
+        public static readonly DigitSymbol Seven = new DigitSymbol(
                                     " _ " +
                                     "  |" +
                                     "  |");
 
-        public static readonly Symbol Eight = new Symbol(
+        public static readonly DigitSymbol Eight = new DigitSymbol(
                                     " _ " +
                                     "|_|" +
                                     "|_|");
 
-        public static readonly Symbol Nine = new Symbol(
+        public static readonly DigitSymbol Nine = new DigitSymbol(
                                     " _ " +
                                     "|_|" +
                                     " _|");
 
-        public static readonly Dictionary<string, string> SymbolToDigitMapping = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> DigitSymbolToDigitMapping = new Dictionary<string, string>
         {
             {Zero.ToString(), "0"},
             {One.ToString(), "1"},
@@ -71,9 +71,9 @@
             {Nine.ToString(), "9"},
         };
 
-        public static readonly List<Symbol> AllSymbols = new List<Symbol> { Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };
+        public static readonly List<DigitSymbol> AllSymbols = new List<DigitSymbol> { Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };
 
-        public Symbol(string linearForm)
+        public DigitSymbol(string linearForm)
             : this()
         {
             LinearForm = linearForm;
@@ -86,11 +86,11 @@
             return AllSymbols.Contains(this);
         }
 
-        public Symbol WithCharAtIndex(char character, int index)
+        public DigitSymbol WithCharAtIndex(char character, int index)
         {
             var sb = new StringBuilder(LinearForm);
             sb[index] = character;
-            return new Symbol(sb.ToString());
+            return new DigitSymbol(sb.ToString());
         }
 
         public override string ToString()
@@ -100,10 +100,10 @@
 
         public string ToDigit()
         {
-            return SymbolToDigitMapping[LinearForm];
+            return DigitSymbolToDigitMapping[LinearForm];
         }
 
-        private bool Equals(Symbol other)
+        private bool Equals(DigitSymbol other)
         {
             return LinearForm.Equals(other.LinearForm);
         }
@@ -115,7 +115,7 @@
                 return false;
             }
 
-            return obj is Symbol && Equals((Symbol)obj);
+            return obj is DigitSymbol && Equals((DigitSymbol)obj);
         }
 
         public override int GetHashCode()
@@ -123,12 +123,12 @@
             return LinearForm.GetHashCode();
         }
 
-        public static bool operator ==(Symbol left, Symbol right)
+        public static bool operator ==(DigitSymbol left, DigitSymbol right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(Symbol left, Symbol right)
+        public static bool operator !=(DigitSymbol left, DigitSymbol right)
         {
             return !(left == right);
         }

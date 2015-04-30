@@ -56,7 +56,10 @@
     <Compile Include="Logic\AccountNumberApproximator.cs" />
     <Compile Include="Logic\AccountNumber.cs" />
     <Compile Include="Logic\AccountNumberChecksumValidator.cs" />
-    <Compile Include="Logic\Symbol.cs" />
+    <Compile Include="Logic\Symbols\IntermediateCharacterGroupingInfo.cs" />
+    <Compile Include="Logic\Symbols\LinearDigitSymbol.cs" />
+    <Compile Include="Logic\Symbols\Small3CharacterGroupingInfo.cs" />
+    <Compile Include="Logic\Symbols\DigitSymbol.cs" />
     <Compile Include="Logic\SymbolTransformationMapping.cs" />
     <Compile Include="Logic\SymbolTransformationMappingsGenerator.cs" />
     <Compile Include="Logic\TextToAccountNumberConverter.cs" />

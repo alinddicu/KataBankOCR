@@ -6,15 +6,15 @@
 
     public class SymbolTransformationMapping
     {
-        public SymbolTransformationMapping(Symbol referenceSymbol)
+        public SymbolTransformationMapping(DigitSymbol referenceSymbol)
         {
             Symbol = referenceSymbol;
-            Transformations = new List<Symbol>();
+            Transformations = new List<DigitSymbol>();
         }
 
-        public Symbol Symbol { get; private set; }
+        public DigitSymbol Symbol { get; private set; }
 
-        public List<Symbol> Transformations { get; private set; }
+        public List<DigitSymbol> Transformations { get; private set; }
 
         public override string ToString()
         {

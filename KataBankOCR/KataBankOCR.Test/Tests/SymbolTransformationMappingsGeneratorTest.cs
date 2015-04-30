@@ -15,7 +15,7 @@
         {
             var results = _generator.Generate();
 
-            Check.That(results.Single(r => r.Symbol == Symbol.One).Transformations).ContainsExactly(Symbol.Seven);
+            Check.That(results.Single(r => r.Symbol == DigitSymbol.One).Transformations).ContainsExactly(DigitSymbol.Seven);
         }
 
         [TestMethod]
@@ -23,16 +23,16 @@
         {
             var results = _generator.Generate().ToList();
 
-            Check.That(results.Single(r => r.Symbol == Symbol.Seven).Transformations).ContainsExactly(Symbol.One);
+            Check.That(results.Single(r => r.Symbol == DigitSymbol.Seven).Transformations).ContainsExactly(DigitSymbol.One);
         }
 
         [TestMethod]
         public void When6ThenMappingContains5And8()
         {
-            var result = _generator.Generate().Single(r => r.Symbol == Symbol.Six);
+            var result = _generator.Generate().Single(r => r.Symbol == DigitSymbol.Six);
 
             Check.That(result.Transformations).HasSize(2);
-            Check.That(result.Transformations).Contains(Symbol.Five, Symbol.Eight);
+            Check.That(result.Transformations).Contains(DigitSymbol.Five, DigitSymbol.Eight);
         }
 
         [TestMethod]

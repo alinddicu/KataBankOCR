@@ -7,7 +7,7 @@
     {
         public bool Validate(string accountNumber)
         {
-            if (accountNumber.Contains(Symbol.IllegalCharacterReplacement))
+            if (accountNumber.Contains(DigitSymbol.IllegalCharacterReplacement))
             {
                 return false;
             }

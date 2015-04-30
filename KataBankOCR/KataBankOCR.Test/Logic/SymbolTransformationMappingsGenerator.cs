@@ -6,11 +6,11 @@
 
     public class SymbolTransformationMappingsGenerator
     {
-        private static readonly char[] ReplacingCharacters = new[] { ' ', '_', '|' };
+        public static readonly char[] ReplacingCharacters = new[] { ' ', '_', '|' };
 
         public IEnumerable<SymbolTransformationMapping> Generate()
         {
-            foreach (var symbol in Symbol.AllSymbols)
+            foreach (var symbol in DigitSymbol.AllSymbols)
             {
                 var mapping = Generate(symbol);
                 if (mapping.Transformations.Any())
@@ -20,7 +20,7 @@
             }
         }
 
-        private SymbolTransformationMapping Generate(Symbol symbol)
+        private SymbolTransformationMapping Generate(DigitSymbol symbol)
         {
             var mapping = new SymbolTransformationMapping(symbol);
             foreach (var item in symbol.LinearForm.ToArray().Select((character, index) => new { Character = character, Index = index }))
