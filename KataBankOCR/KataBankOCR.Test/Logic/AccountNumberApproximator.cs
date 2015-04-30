@@ -11,9 +11,9 @@
         private readonly AccountNumberChecksumValidator _checksumValidator = new AccountNumberChecksumValidator();
         private readonly SymbolTransformationMapping[] _symbolTransformations = new SymbolTransformationMappingsGenerator().Generate().ToArray();
 
-        public AccountNumber Approximate(string accountNumberValue, IEnumerable<LinearDigitSymbol> linearDigitSymbols)
+        public Account Approximate(string accountNumberValue, IEnumerable<LinearDigitSymbol> linearDigitSymbols)
         {
-            var accountNumber = new AccountNumber(accountNumberValue);
+            var accountNumber = new Account(accountNumberValue);
             if (accountNumberValue.Contains(DigitSymbol.IllegalCharacterReplacement))
             {
                 accountNumber.ValidationStatus = ValidationStatus.ILL;
@@ -29,12 +29,12 @@
             return accountNumber;
         }
 
-        private AccountNumber ApproximateOnIllegal(AccountNumber accountNumber, IEnumerable<LinearDigitSymbol> linearDigitSymbols)
+        private Account ApproximateOnIllegal(Account accountNumber, IEnumerable<LinearDigitSymbol> linearDigitSymbols)
         {
-            var illegalPosition = accountNumber.Value.IndexOf(DigitSymbol.IllegalCharacterReplacement);
+            var illegalPosition = accountNumber.Number.IndexOf(DigitSymbol.IllegalCharacterReplacement);
             var incompleteDigitSymbol = new DigitSymbol(linearDigitSymbols.ToArray()[illegalPosition].ToString());
 
-            var approximations = new List<AccountNumber>();
+            var approximations = new List<Account>();
 
             var characters = incompleteDigitSymbol.LinearForm.ToStringArray();
             for (var index = 0; index < characters.Count(); index++)
@@ -46,10 +46,10 @@
                     var candidateDigit = new DigitSymbol(incompleteDigitSymbol.LinearForm.ReplaceCharAtIndex(index, replacingCharacter));
                     if (candidateDigit.IsValid())
                     {
-                        var candidateAccountNumberValue = accountNumber.Value.ReplaceCharAtIndex(index, candidateDigit.ToDigit());
+                        var candidateAccountNumberValue = accountNumber.Number.ReplaceCharAtIndex(index, candidateDigit.ToDigit());
                         if (_checksumValidator.Validate(candidateAccountNumberValue))
                         {
-                            approximations.Add(new AccountNumber(candidateAccountNumberValue));
+                            approximations.Add(new Account(candidateAccountNumberValue));
                         }
                     }
                 }
@@ -67,21 +67,21 @@
                 .Select(c => c.ToString()).Except(new[] { currentCharacter });
         }
 
-        private AccountNumber ApproximateOnError(AccountNumber accountNumber)
+        private Account ApproximateOnError(Account accountNumber)
         {
-            var approximations = new List<AccountNumber>();
-            var digits = accountNumber.Value.ToStringArray();
+            var approximations = new List<Account>();
+            var accountNumberDigits = accountNumber.Number.ToStringArray();
 
-            for (var index = 0; index < digits.Count(); index++)
+            for (var index = 0; index < accountNumberDigits.Count(); index++)
             {
-                var digit = digits[index];
-                var characterTransformations = GetDigitTransformations(digit);
-                foreach (var transformation in characterTransformations)
+                var digit = accountNumberDigits[index];
+                var digitTransformations = GetDigitTransformations(digit);
+                foreach (var digitTransformation in digitTransformations)
                 {
-                    var approximation = accountNumber.Value.ReplaceCharAtIndex(index, transformation);
+                    var approximation = accountNumber.Number.ReplaceCharAtIndex(index, digitTransformation);
                     if (_checksumValidator.Validate(approximation))
                     {
-                        approximations.Add(new AccountNumber(approximation));
+                        approximations.Add(new Account(approximation));
                     }
                 }
             }

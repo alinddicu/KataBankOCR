@@ -17,7 +17,7 @@
             var text = File.ReadAllText(path);
 
             var textConverter = new TextToAccountNumberConverter();
-            var checkedText = textConverter.Convert(text).Value;
+            var checkedText = textConverter.Convert(text).Number;
 
             Check.That(checkedText).IsEqualTo("711111111");
         }
@@ -30,7 +30,7 @@
             var text = File.ReadAllText(path);
 
             var textConverter = new TextToAccountNumberConverter();
-            var checkedText = textConverter.Convert(text).Value;
+            var checkedText = textConverter.Convert(text).Number;
 
             Check.That(checkedText).IsEqualTo("777777177");
         }
@@ -43,7 +43,7 @@
             var text = File.ReadAllText(path);
 
             var textConverter = new TextToAccountNumberConverter();
-            var checkedText = textConverter.Convert(text).Value;
+            var checkedText = textConverter.Convert(text).Number;
 
             Check.That(checkedText).IsEqualTo("200800000");
         }
@@ -56,7 +56,7 @@
             var text = File.ReadAllText(path);
 
             var textConverter = new TextToAccountNumberConverter();
-            var checkedText = textConverter.Convert(text).Value;
+            var checkedText = textConverter.Convert(text).Number;
 
             Check.That(checkedText).IsEqualTo("333393333");
         }
@@ -73,7 +73,7 @@
 
             Check.That(accountNumber.ValidationStatus).IsEqualTo(ValidationStatus.AMB);
             Check.That(accountNumber.Approximations).HasSize(3);
-            Check.That(accountNumber.Approximations.Select(a => a.Value)).Contains("888886888", "888888880", "888888988");
+            Check.That(accountNumber.Approximations.Select(a => a.Number)).Contains("888886888", "888888880", "888888988");
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@
 
             var accountNumber = textConverter.Convert(text);
 
-            Check.That(accountNumber.Value).IsEqualTo("000000051");
+            Check.That(accountNumber.Number).IsEqualTo("000000051");
         }
     }
 }

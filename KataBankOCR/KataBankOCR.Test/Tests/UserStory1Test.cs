@@ -21,7 +21,7 @@
                 var file = new FileInfo(filePath);
                 var text = File.ReadAllText(file.FullName);
                 var conversionResult = Converter.Convert(text);
-                Check.That(conversionResult.Value).IsEqualTo(Path.GetFileNameWithoutExtension(file.Name));
+                Check.That(conversionResult.Number).IsEqualTo(Path.GetFileNameWithoutExtension(file.Name));
             }
         }
 

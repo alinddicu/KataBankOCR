@@ -3,26 +3,26 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class AccountNumber
+    public class Account
     {
-        public AccountNumber(string value)
+        public Account(string number)
         {
-            Value = value;
-            Approximations = new List<AccountNumber>();
+            Number = number;
+            Approximations = new List<Account>();
         }
 
-        public string Value { get; private set; }
+        public string Number { get; private set; }
 
         public ValidationStatus ValidationStatus { get; set; }
 
-        public IEnumerable<AccountNumber> Approximations { get; private set; }
+        public IEnumerable<Account> Approximations { get; private set; }
 
-        public void UpdateApproximations(IEnumerable<AccountNumber> approximations)
+        public void UpdateApproximations(IEnumerable<Account> approximations)
         {
             Approximations = approximations;
             if (Approximations.Count() == 1)
             {
-                Value = Approximations.First().Value;
+                Number = Approximations.First().Number;
                 ValidationStatus = ValidationStatus.OK;
             }
             else

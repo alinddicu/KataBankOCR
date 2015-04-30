@@ -54,7 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Logic\AccountNumberApproximator.cs" />
-    <Compile Include="Logic\AccountNumber.cs" />
+    <Compile Include="Logic\Account.cs" />
     <Compile Include="Logic\AccountNumberChecksumValidator.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Logic\Symbols\IntermediateCharacterGroupingInfo.cs" />

@@ -12,7 +12,7 @@
 
         private readonly AccountNumberApproximator _approximator = new AccountNumberApproximator();
 
-        public AccountNumber Convert(string text)
+        public Account Convert(string text)
         {
             var lines = text.Split(Environment.NewLine.ToCharArray());
             var linearSymbols = lines
