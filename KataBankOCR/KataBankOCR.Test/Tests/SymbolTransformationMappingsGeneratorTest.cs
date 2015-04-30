@@ -8,7 +8,7 @@
     [TestClass]
     public class SymbolTransformationMappingsGeneratorTest
     {
-        private static readonly SymbolTransformationMappingsGenerator _generator = new SymbolTransformationMappingsGenerator();
+        private static readonly DigitSymbolTransformationMappingsGenerator _generator = new DigitSymbolTransformationMappingsGenerator();
 
         [TestMethod]
         public void When1ThenMappingContainsOnly7()

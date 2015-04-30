@@ -9,7 +9,7 @@
     [TestClass]
     public class UserStory1Test
     {
-        private static readonly TextToAccountNumberConverter Converter = new TextToAccountNumberConverter();
+        private static readonly TextToAccountConverter Converter = new TextToAccountConverter();
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory1TestCases", "Ressources1")]
@@ -32,7 +32,7 @@
         {
             const string path = "Ressources1/123456789.txt";
             var text = File.ReadAllText(path);
-            var textConverter = new TextToAccountNumberConverter();
+            var textConverter = new TextToAccountConverter();
             var checkedText = textConverter.Convert(text);
             Check.That(checkedText).IsEqualTo("123456789");
         }

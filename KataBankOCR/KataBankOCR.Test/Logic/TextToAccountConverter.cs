@@ -6,7 +6,7 @@
     using System.Linq;
     using Symbols;
 
-    public class TextToAccountNumberConverter
+    public class TextToAccountConverter
     {
         private const int SymbolsPerTextFileLine = 9;
 

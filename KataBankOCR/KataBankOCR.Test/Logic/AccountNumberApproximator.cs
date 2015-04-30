@@ -9,20 +9,20 @@
     public class AccountNumberApproximator
     {
         private readonly AccountNumberChecksumValidator _checksumValidator = new AccountNumberChecksumValidator();
-        private readonly SymbolTransformationMapping[] _symbolTransformations = new SymbolTransformationMappingsGenerator().Generate().ToArray();
+        private readonly DigitSymbolTransformationMapping[] _symbolTransformations = new DigitSymbolTransformationMappingsGenerator().Generate().ToArray();
 
         public Account Approximate(string accountNumberValue, IEnumerable<LinearDigitSymbol> linearDigitSymbols)
         {
             var accountNumber = new Account(accountNumberValue);
             if (accountNumberValue.Contains(DigitSymbol.IllegalCharacterReplacement))
             {
-                accountNumber.ValidationStatus = ValidationStatus.ILL;
+                accountNumber.ValidationStatus = AccountValidationStatus.ILL;
                 return ApproximateOnIllegal(accountNumber, linearDigitSymbols);
             }
 
             if (!_checksumValidator.Validate(accountNumberValue))
             {
-                accountNumber.ValidationStatus = ValidationStatus.ERR;
+                accountNumber.ValidationStatus = AccountValidationStatus.ERR;
                 return ApproximateOnError(accountNumber);
             }
 
@@ -62,7 +62,7 @@
 
         private IEnumerable<string> GetReplacingCharacters(string currentCharacter)
         {
-            return SymbolTransformationMappingsGenerator
+            return DigitSymbolTransformationMappingsGenerator
                 .ReplacingCharacters
                 .Select(c => c.ToString()).Except(new[] { currentCharacter });
         }

@@ -13,7 +13,7 @@
 
         public string Number { get; private set; }
 
-        public ValidationStatus ValidationStatus { get; set; }
+        public AccountValidationStatus ValidationStatus { get; set; }
 
         public IEnumerable<Account> Approximations { get; private set; }
 
@@ -28,11 +28,11 @@
             if (Approximations.Count() == 1)
             {
                 Number = Approximations.First().Number;
-                ValidationStatus = ValidationStatus.OK;
+                ValidationStatus = AccountValidationStatus.OK;
             }
             else
             {
-                ValidationStatus = ValidationStatus.AMB;
+                ValidationStatus = AccountValidationStatus.AMB;
             }
         }
     }

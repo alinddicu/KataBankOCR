@@ -4,11 +4,11 @@
     using System.Globalization;
     using System.Linq;
 
-    public class SymbolTransformationMapping
+    public class DigitSymbolTransformationMapping
     {
-        public SymbolTransformationMapping(DigitSymbol referenceSymbol)
+        public DigitSymbolTransformationMapping(DigitSymbol symbol)
         {
-            Symbol = referenceSymbol;
+            Symbol = symbol;
             Transformations = new List<DigitSymbol>();
         }
 
@@ -18,7 +18,7 @@
 
         public override string ToString()
         {
-            var format = "ReferenceSymbol: {0}, Transformations: [{1}]";
+            var format = "Symbol: {0}, Transformations: [{1}]";
             var toString = string.Format(CultureInfo.InvariantCulture, format, Symbol.ToDigit(), string.Join(", ", Transformations.Select(t => t.ToDigit()).ToArray()));
 
             return toString;

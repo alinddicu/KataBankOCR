@@ -8,7 +8,7 @@
     [TestClass]
     public class UserStory3Test
     {
-        private static readonly TextToAccountNumberConverter Converter = new TextToAccountNumberConverter();
+        private static readonly TextToAccountConverter Converter = new TextToAccountConverter();
 
         [TestMethod]
         [DeploymentItem("Tests/UserStory3TestCases/000000051.txt", "Ressources3")]
@@ -16,7 +16,7 @@
         {
             const string path = "Ressources3/000000051.txt";
             var text = File.ReadAllText(path);
-            var textConverter = new TextToAccountNumberConverter();
+            var textConverter = new TextToAccountConverter();
             var checkedText = Converter.Convert(text).Number;
             Check.That(checkedText).IsEqualTo("000000051");
         }
@@ -27,7 +27,7 @@
         {
             const string path = "Ressources3/49006771x.txt";
             var text = File.ReadAllText(path);
-            var textConverter = new TextToAccountNumberConverter();
+            var textConverter = new TextToAccountConverter();
             var checkedText = Converter.Convert(text).Number;
             Check.That(checkedText).IsEqualTo("49006771?");
         }
@@ -38,7 +38,7 @@
         {
             const string path = "Ressources3/1234x678x.txt";
             var text = File.ReadAllText(path);
-            var textConverter = new TextToAccountNumberConverter();
+            var textConverter = new TextToAccountConverter();
             var checkedText = Converter.Convert(text).Number;
             Check.That(checkedText).IsEqualTo("1234?678?");
         }

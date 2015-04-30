@@ -1,6 +1,6 @@
 ﻿namespace KataBankOCR.Test.Logic
 {
-    public enum ValidationStatus
+    public enum AccountValidationStatus
     {
         OK,
         ERR,

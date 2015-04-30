@@ -4,11 +4,11 @@
     using System.Linq;
     using NFluent;
 
-    public class SymbolTransformationMappingsGenerator
+    public class DigitSymbolTransformationMappingsGenerator
     {
         public static readonly char[] ReplacingCharacters = new[] { ' ', '_', '|' };
 
-        public IEnumerable<SymbolTransformationMapping> Generate()
+        public IEnumerable<DigitSymbolTransformationMapping> Generate()
         {
             foreach (var symbol in DigitSymbol.AllSymbols)
             {
@@ -20,9 +20,9 @@
             }
         }
 
-        private SymbolTransformationMapping Generate(DigitSymbol symbol)
+        private DigitSymbolTransformationMapping Generate(DigitSymbol symbol)
         {
-            var mapping = new SymbolTransformationMapping(symbol);
+            var mapping = new DigitSymbolTransformationMapping(symbol);
             foreach (var item in symbol.LinearForm.ToArray().Select((character, index) => new { Character = character, Index = index }))
             {
                 var replacingCharacters = GetReplacingCharacters(item.Character);

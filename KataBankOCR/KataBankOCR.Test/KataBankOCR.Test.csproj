@@ -61,16 +61,16 @@
     <Compile Include="Logic\Symbols\LinearDigitSymbol.cs" />
     <Compile Include="Logic\Symbols\Small3CharacterGroupingInfo.cs" />
     <Compile Include="Logic\Symbols\DigitSymbol.cs" />
-    <Compile Include="Logic\SymbolTransformationMapping.cs" />
-    <Compile Include="Logic\SymbolTransformationMappingsGenerator.cs" />
-    <Compile Include="Logic\TextToAccountNumberConverter.cs" />
+    <Compile Include="Logic\DigitSymbolTransformationMapping.cs" />
+    <Compile Include="Logic\DigitSymbolTransformationMappingsGenerator.cs" />
+    <Compile Include="Logic\TextToAccountConverter.cs" />
     <Compile Include="Tests\SymbolTransformationMappingsGeneratorTest.cs" />
     <Compile Include="Tests\UserStory1Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\UserStory2Test.cs" />
     <Compile Include="Tests\UserStory3Test.cs" />
     <Compile Include="Tests\UserStory4Test.cs" />
-    <Compile Include="Logic\ValidationStatus.cs" />
+    <Compile Include="Logic\AccountValidationStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Tests\UserStory1TestCases\123456789.txt">
@@ -116,6 +116,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Tests\UserStory4TestCases\0x0000051.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\UserStory4TestCases\555555555.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Tests\UserStory4TestCases\333333333.txt">
