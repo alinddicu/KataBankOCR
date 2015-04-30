@@ -1,5 +1,6 @@
 ﻿namespace KataBankOCR.Test
 {
+    using System.Globalization;
     using System.Linq;
     using System.Text;
 
@@ -20,7 +21,7 @@
 
         public static string[] ToStringArray(this string value)
         {
-            return value.ToCharArray().Select(c => c.ToString()).ToArray();
+            return value.ToCharArray().Select(c => c.ToString(CultureInfo.InvariantCulture)).ToArray();
         }
     }
 }

@@ -18,7 +18,7 @@
             var linearSymbols = lines
                 .Where(line => !line.Equals(string.Empty))
                 // transforming to list of strings = easier to work with
-                .Select(line => line.ToCharArray().Select(c => c.ToString(CultureInfo.InvariantCulture)))
+                .Select(line => line.ToStringArray())
                 .Select(line => line.Select((character, index) => new Small3CharacterGroupingInfo(character, index)))
                 // each symbol is formed of 3 columns => group of 3 chars
                 .Select(line => line.GroupBy(s => s.Index / 3))
