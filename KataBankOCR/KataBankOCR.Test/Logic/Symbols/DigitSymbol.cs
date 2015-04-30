@@ -109,12 +109,9 @@
 
         public string ToDigit()
         {
-            if (!DigitSymbolToDigitMapping.ContainsKey(LinearForm))
-            {
-                return IllegalCharacterReplacement;
-            }
-
-            return DigitSymbolToDigitMapping[LinearForm];
+            return !DigitSymbolToDigitMapping.ContainsKey(LinearForm) 
+                ? IllegalCharacterReplacement 
+                : DigitSymbolToDigitMapping[LinearForm];
         }
 
         private bool Equals(DigitSymbol other)

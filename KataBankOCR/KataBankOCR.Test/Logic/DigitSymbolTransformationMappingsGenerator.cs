@@ -22,15 +22,15 @@
                 .ToArray()
                 .Select((character, index) => new {Character = character, Index = index});
 
-            foreach (var item in charactersWithIndexes)
+            foreach (var characterWithIndexe in charactersWithIndexes)
             {
-                var replacingCharacters = GetReplacingCharacters(item.Character);
+                var replacingCharacters = GetReplacingCharacters(characterWithIndexe.Character);
                 foreach (var replacingCharacter in replacingCharacters)
                 {
-                    var candidate = symbol.WithCharAtIndex(replacingCharacter, item.Index);
-                    if (candidate.IsValid())
+                    var transformationCandidate = symbol.WithCharAtIndex(replacingCharacter, characterWithIndexe.Index);
+                    if (transformationCandidate.IsValid())
                     {
-                        mapping.Transformations.Add(candidate);
+                        mapping.Transformations.Add(transformationCandidate);
                     }
                 }
             }
