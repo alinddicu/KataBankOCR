@@ -36,7 +36,7 @@
 
             var approximations = new List<AccountNumber>();
 
-            var characters = incompleteDigitSymbol.LinearForm.ToCharArray().Select(c => c.ToString()).ToArray();
+            var characters = incompleteDigitSymbol.LinearForm.ToStringArray();
             for (var index = 0; index < characters.Count(); index++)
             {
                 var character = characters[index];
@@ -70,7 +70,7 @@
         private AccountNumber ApproximateOnError(AccountNumber accountNumber)
         {
             var approximations = new List<AccountNumber>();
-            var digits = accountNumber.Value.ToCharArray().Select(c => c.ToString()).ToArray();
+            var digits = accountNumber.Value.ToStringArray();
 
             for (var index = 0; index < digits.Count(); index++)
             {

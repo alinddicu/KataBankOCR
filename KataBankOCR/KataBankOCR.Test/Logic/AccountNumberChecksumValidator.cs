@@ -15,8 +15,7 @@
             accountNumber = string.Join(string.Empty, accountNumber.ToCharArray().Reverse().ToArray());
 
             var sum = accountNumber
-                .ToCharArray()
-                .Select(c => c.ToString())
+                .ToStringArray()
                 .Select((character, index) => new { Value = int.Parse(character), Index = index + 1 })
                 .Sum(o => o.Index * o.Value);
             var checksum = sum % 11;
