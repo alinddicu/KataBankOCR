@@ -8,8 +8,6 @@
 
     public class AccountNumberApproximator
     {
-        private static readonly char[] ReplacingCharacters = SymbolTransformationMappingsGenerator.ReplacingCharacters;
-
         private readonly AccountNumberChecksumValidator _checksumValidator = new AccountNumberChecksumValidator();
         private readonly SymbolTransformationMapping[] _symbolTransformations = new SymbolTransformationMappingsGenerator().Generate().ToArray();
 
@@ -45,16 +43,10 @@
                 var replacingCharacters = GetReplacingCharacters(character);
                 foreach (var replacingCharacter in replacingCharacters)
                 {
-                    var sb = new StringBuilder(incompleteDigitSymbol.LinearForm);
-                    sb[index] = replacingCharacter[0];
-
-                    var candidateDigit = new DigitSymbol(sb.ToString());
+                    var candidateDigit = new DigitSymbol(incompleteDigitSymbol.LinearForm.ReplaceCharAtIndex(index, replacingCharacter));
                     if (candidateDigit.IsValid())
                     {
-                        sb = new StringBuilder(accountNumber.Value);
-                        sb[index] = candidateDigit.ToDigit()[0];
-
-                        var candidateAccountNumberValue = sb.ToString();
+                        var candidateAccountNumberValue = accountNumber.Value.ReplaceCharAtIndex(index, candidateDigit.ToDigit());
                         if (_checksumValidator.Validate(candidateAccountNumberValue))
                         {
                             approximations.Add(new AccountNumber(candidateAccountNumberValue));
@@ -70,7 +62,9 @@
 
         private IEnumerable<string> GetReplacingCharacters(string currentCharacter)
         {
-            return ReplacingCharacters.Select(c => c.ToString()).Except(new[] { currentCharacter });
+            return SymbolTransformationMappingsGenerator
+                .ReplacingCharacters
+                .Select(c => c.ToString()).Except(new[] { currentCharacter });
         }
 
         private AccountNumber ApproximateOnError(AccountNumber accountNumber)
@@ -81,13 +75,10 @@
             for (var index = 0; index < digits.Count(); index++)
             {
                 var digit = digits[index];
-                var characterTransformations = GetCharacterTransformations(digit);
+                var characterTransformations = GetDigitTransformations(digit);
                 foreach (var transformation in characterTransformations)
                 {
-                    var sb = new StringBuilder(accountNumber.Value);
-                    sb[index] = transformation[0];
-
-                    var approximation = sb.ToString();
+                    var approximation = accountNumber.Value.ReplaceCharAtIndex(index, transformation);
                     if (_checksumValidator.Validate(approximation))
                     {
                         approximations.Add(new AccountNumber(approximation));
@@ -100,7 +91,7 @@
             return accountNumber;
         }
 
-        private IEnumerable<string> GetCharacterTransformations(string digit)
+        private IEnumerable<string> GetDigitTransformations(string digit)
         {
             var symbol = _symbolTransformations.SingleOrDefault(st => st.Symbol.ToDigit() == digit);
             if (symbol == null)
