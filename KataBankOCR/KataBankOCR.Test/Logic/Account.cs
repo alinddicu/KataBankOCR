@@ -17,8 +17,13 @@
 
         public IEnumerable<Account> Approximations { get; private set; }
 
-        public void UpdateApproximations(IEnumerable<Account> approximations)
+        public void UpdateApproximations(ICollection<Account> approximations)
         {
+            if (!approximations.Any())
+            {
+                return;
+            }
+
             Approximations = approximations;
             if (Approximations.Count() == 1)
             {

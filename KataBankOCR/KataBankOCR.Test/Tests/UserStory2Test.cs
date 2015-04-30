@@ -27,5 +27,15 @@
 
             Check.That(result).IsFalse();
         }
+
+        [TestMethod]
+        public void Given123456789AsAccountNumberWhenValidateThenReturnTrue()
+        {
+            var validator = new AccountNumberChecksumValidator();
+
+            var result = validator.Validate("123456789");
+
+            Check.That(result).IsTrue();
+        }
     }
 }

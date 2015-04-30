@@ -46,7 +46,7 @@
                     var candidateDigit = new DigitSymbol(incompleteDigitSymbol.LinearForm.ReplaceCharAtIndex(index, replacingCharacter));
                     if (candidateDigit.IsValid())
                     {
-                        var candidateAccountNumberValue = accountNumber.Number.ReplaceCharAtIndex(index, candidateDigit.ToDigit());
+                        var candidateAccountNumberValue = accountNumber.Number.ReplaceCharAtIndex(illegalPosition, candidateDigit.ToDigit());
                         if (_checksumValidator.Validate(candidateAccountNumberValue))
                         {
                             approximations.Add(new Account(candidateAccountNumberValue));

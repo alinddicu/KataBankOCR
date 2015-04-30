@@ -88,5 +88,31 @@
 
             Check.That(accountNumber.Number).IsEqualTo("000000051");
         }
+
+        [TestMethod]
+        [DeploymentItem("Tests/UserStory4TestCases/x23456789.txt", "Ressources4")]
+        public void GivenUseCase4v1TxtWhenConvertx23456789ThenReturnILL()
+        {
+            const string path = "Ressources4/x23456789.txt";
+            var text = File.ReadAllText(path);
+            var textConverter = new TextToAccountNumberConverter();
+
+            var accountNumber = textConverter.Convert(text);
+
+            Check.That(accountNumber.Number).IsEqualTo("123456789");
+        }
+
+        [TestMethod]
+        [DeploymentItem("Tests/UserStory4TestCases/49086771x.txt", "Ressources4")]
+        public void GivenUseCase4v1TxtWhenConvertx23456789ThenReturn490867715()
+        {
+            const string path = "Ressources4/49086771x.txt";
+            var text = File.ReadAllText(path);
+            var textConverter = new TextToAccountNumberConverter();
+
+            var accountNumber = textConverter.Convert(text);
+
+            Check.That(accountNumber.Number).IsEqualTo("490867715");
+        }
     }
 }
