@@ -29,7 +29,7 @@
                 .ToDictionary(o => o.Key)
                 // easy part
                 .Values
-                .Select(value => new LinearDigitSymbol(value));
+                .Select(value => new DigitSymbol(value));
 
             var digits = linearSymbols
                 .Select(linearSymbol => linearSymbol.ToDigit())

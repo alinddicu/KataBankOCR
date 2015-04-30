@@ -14,10 +14,7 @@
         [DeploymentItem("Tests/UserStory3TestCases/000000051.txt", "Ressources3")]
         public void GivenUseCase3v1TxtWhenConvertThenReturn000000051()
         {
-            const string path = "Ressources3/000000051.txt";
-            var text = File.ReadAllText(path);
-            var textConverter = new TextToAccountConverter();
-            var checkedText = Converter.Convert(text).Number;
+            var checkedText = LoadAndConvert("000000051");
             Check.That(checkedText).IsEqualTo("000000051");
         }
 
@@ -25,10 +22,7 @@
         [DeploymentItem("Tests/UserStory3TestCases/49006771x.txt", "Ressources3")]
         public void GivenUseCase3v1TxtWhenConvertThenReturn49006771x()
         {
-            const string path = "Ressources3/49006771x.txt";
-            var text = File.ReadAllText(path);
-            var textConverter = new TextToAccountConverter();
-            var checkedText = Converter.Convert(text).Number;
+            var checkedText = LoadAndConvert("49006771x");
             Check.That(checkedText).IsEqualTo("49006771?");
         }
 
@@ -36,11 +30,16 @@
         [DeploymentItem("Tests/UserStory3TestCases/1234x678x.txt", "Ressources3")]
         public void GivenUseCase3v1TxtWhenConvertThenReturn1234x678x()
         {
-            const string path = "Ressources3/1234x678x.txt";
-            var text = File.ReadAllText(path);
-            var textConverter = new TextToAccountConverter();
-            var checkedText = Converter.Convert(text).Number;
+            var checkedText = LoadAndConvert("1234x678x");
             Check.That(checkedText).IsEqualTo("1234?678?");
+        }
+
+        private static string LoadAndConvert(string filePath)
+        {
+            var text = File.ReadAllText("Ressources3/" + filePath + ".txt");
+            var textConverter = new TextToAccountConverter();
+
+            return textConverter.Convert(text).Number;
         }
     }
 }

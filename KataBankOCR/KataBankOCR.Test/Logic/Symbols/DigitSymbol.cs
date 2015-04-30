@@ -1,7 +1,9 @@
 ﻿namespace KataBankOCR.Test.Logic
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
+    using KataBankOCR.Test.Logic.Symbols;
 
     public struct DigitSymbol
     {
@@ -73,6 +75,12 @@
 
         public static readonly List<DigitSymbol> AllSymbols = new List<DigitSymbol> { Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };
 
+        public DigitSymbol(IEnumerable<IntermediateCharacterGroupingInfo> isgs)
+            : this()
+        {
+            LinearForm = string.Join(string.Empty, isgs.SelectMany(o => o.GroupInformation.Select(o1 => o1.Character)).ToArray());
+        }
+
         public DigitSymbol(string linearForm)
             : this()
         {
@@ -89,7 +97,9 @@
         public DigitSymbol WithCharAtIndex(char character, int index)
         {
             var sb = new StringBuilder(LinearForm);
+
             sb[index] = character;
+
             return new DigitSymbol(sb.ToString());
         }
 
@@ -100,6 +110,11 @@
 
         public string ToDigit()
         {
+            if (!DigitSymbolToDigitMapping.ContainsKey(LinearForm))
+            {
+                return IllegalCharacterReplacement;
+            }
+
             return DigitSymbolToDigitMapping[LinearForm];
         }
 

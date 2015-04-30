@@ -11,7 +11,7 @@
         private readonly AccountNumberChecksumValidator _checksumValidator = new AccountNumberChecksumValidator();
         private readonly DigitSymbolTransformationMapping[] _symbolTransformations = new DigitSymbolTransformationMappingsGenerator().Generate().ToArray();
 
-        public Account Approximate(string accountNumberValue, IEnumerable<LinearDigitSymbol> linearDigitSymbols)
+        public Account Approximate(string accountNumberValue, IEnumerable<DigitSymbol> linearDigitSymbols)
         {
             var accountNumber = new Account(accountNumberValue);
             if (accountNumberValue.Contains(DigitSymbol.IllegalCharacterReplacement))
@@ -29,7 +29,7 @@
             return accountNumber;
         }
 
-        private Account ApproximateOnIllegal(Account accountNumber, IEnumerable<LinearDigitSymbol> linearDigitSymbols)
+        private Account ApproximateOnIllegal(Account accountNumber, IEnumerable<DigitSymbol> linearDigitSymbols)
         {
             var illegalPosition = accountNumber.Number.IndexOf(DigitSymbol.IllegalCharacterReplacement);
             var incompleteDigitSymbol = new DigitSymbol(linearDigitSymbols.ToArray()[illegalPosition].ToString());

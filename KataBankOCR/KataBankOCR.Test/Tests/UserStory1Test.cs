@@ -24,17 +24,5 @@
                 Check.That(conversionResult.Number).IsEqualTo(Path.GetFileNameWithoutExtension(file.Name));
             }
         }
-
-        [TestMethod]
-        [Ignore]
-        [DeploymentItem("Tests/UserStory1TestCases/123456789.txt", "Ressources1")]
-        public void GivenUseCase1TxtWhenConvertThenReturn000000000()
-        {
-            const string path = "Ressources1/123456789.txt";
-            var text = File.ReadAllText(path);
-            var textConverter = new TextToAccountConverter();
-            var checkedText = textConverter.Convert(text);
-            Check.That(checkedText).IsEqualTo("123456789");
-        }
     }
 }
