@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Digit\Symbol.cs" />
+    <Compile Include="Digit\Digit.cs" />
     <Compile Include="Digit\Element.cs" />
     <Compile Include="Digit\Line.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
